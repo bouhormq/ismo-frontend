@@ -184,6 +184,7 @@ export const SendEmailFormWrapper = ({ handleClose, isSending = false }: Props) 
         </label>
         <FQuillInput<SendEmailDataType>
           name="message"
+          label="Message"
           theme="snow"
           placeholder="Rédigez votre message..."
           className="min-h-[200px]"

@@ -14,7 +14,7 @@ type Props = {
 };
 
 const ZohoActionButtons = ({ companyId, zohoContactId: initialZohoId, onZohoSynced }: Props) => {
-  const [zohoContactId, setZohoContactId] = useState(initialZohoId);
+  const [_zohoContactId, setZohoContactId] = useState(initialZohoId);
   const [isSyncing, setIsSyncing] = useState(false);
 
   const ensureZohoContact = async (): Promise<string | null> => {

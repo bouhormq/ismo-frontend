@@ -41,6 +41,7 @@ export default function Form<
   // @ts-ignore
   const methods = useForm<TFieldValues, TContext, TTransformedValues>({
     ...options,
+    // @ts-ignore
     resolver: resolverSchema ? zodResolver(resolverSchema) : undefined,
   });
 
