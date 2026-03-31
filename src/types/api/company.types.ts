@@ -32,6 +32,7 @@ type InitialEditCompanyParams = Omit<
   | "_memo"
 >;
 
+export type EditCompanyParams = InitialEditCompanyParams & {
   usedItems: SelectParam[];
   desiredItems: SelectParam[];
 
