@@ -1,0 +1,154 @@
+.rbc-month-row {
+  overflow: visible;
+}
+.rbc-time-content {
+  border-top: none;
+}
+
+.rbc-today {
+  background: none;
+}
+
+.rbc-timeslot-group {
+  border-bottom: none;
+}
+.rbc-event,
+.rbc-event.rbc-selected {
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+.rbc-time-content > * + * > * {
+  border-left: 1px solid rgba(242, 242, 242, 1);
+}
+
+.rbc-timeslot-group {
+  flex: unset !important;
+  min-height: unset;
+  height: 19px !important;
+}
+
+.rbc-allday-cell {
+  display: none;
+}
+
+.rbc-event {
+  background-color: var(--color-primary-light) !important;
+  color: black;
+}
+.rbc-event-label {
+  display: none;
+}
+
+.rbc-selected {
+  background-color: var(--color-primary) !important;
+  color: white;
+}
+
+.rbc-ellipsis,
+.rbc-show-more,
+.rbc-row-segment .rbc-event-content,
+.rbc-event-label {
+  overflow: visible;
+}
+
+.rbc-header {
+  padding-top: 14px;
+  padding-left: 14px;
+  text-align: left;
+  border-left: unset !important;
+
+  @media screen and (max-width: 900px) {
+    padding-top: 0;
+    padding-left: 5px;
+    border-bottom: unset;
+  }
+}
+
+.rbc-time-header-content {
+  @media screen and (max-width: 900px) {
+    border-left: unset !important;
+  }
+}
+
+.rbc-events-container,
+.rbc-timeslot-group,
+.rbc-time-content,
+.rbc-day-slot,
+.rbc-time-column {
+  @media screen and (max-width: 900px) {
+    border: unset !important;
+  }
+}
+
+.rbc-date-cell,
+.rbc-month-row,
+.rbc-row-content,
+.rbc-row-content-scrollable .rbc-row-content-scroll-container,
+.rbc-addons-dnd-row-body,
+.rbc-row,
+.rbc-row-segment {
+  @media screen and (max-width: 900px) {
+    border: unset !important;
+  }
+}
+
+.rbc-month-view {
+  border-radius: 16px !important;
+  border: 1px solid #f2f2f2 !important;
+
+  @media screen and (max-width: 900px) {
+    border: unset !important;
+    * {
+      border: unset !important;
+    }
+  }
+}
+
+.rbc-date-cell + .rbc-now {
+  @media screen and (max-width: 900px) {
+    padding-top: 0px;
+    padding-left: 0px;
+    > div {
+      background: #0a2d6e !important;
+      color: white;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 40px;
+    }
+  }
+}
+
+.rbc-date-cell {
+  text-align: left;
+  padding-top: 8px;
+  padding-left: 8px;
+  font-weight: 600;
+}
+
+.rbc-day-slot .rbc-event,
+.rbc-day-slot .rbc-background-event {
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+.rbc-event-content {
+  z-index: 1;
+}
+
+.rbc-time-header {
+  @media screen and (max-width: 900px) {
+    border: none !important;
+  }
+}
+
+.rbc-off-range {
+  @media screen and (max-width: 900px) {
+    background-color: #f9f9f9;
+  }
+}

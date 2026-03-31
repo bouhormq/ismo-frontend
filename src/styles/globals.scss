@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.login_logo_container {
+  background: linear-gradient(180deg, #0c3684 0%, #030c1e 100%);
+}
+
+.invertedRoundedBorder {
+  position: relative;
+}
+
+.active .inverted_radius_parent {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% + 26px);
+  background: #e7ebee;
+  width: 16px;
+}
+
+.active .inverted_radius_parent .inverted_relative_container {
+  position: relative;
+  height: 100%;
+}
+.active .inverted_radius_parent .inverted_relative_container::after,
+.active .inverted_radius_parent .inverted_relative_container::before {
+  content: "";
+  position: absolute;
+  background-color: white;
+  z-index: 100;
+  width: 16px;
+  height: 24px;
+}
+
+.active .inverted_radius_parent .inverted_relative_container::after {
+  border-radius: 0 0 16px 0;
+  bottom: calc(100% - 13px);
+  right: 0;
+}
+
+.active .inverted_radius_parent .inverted_relative_container::before {
+  border-radius: 0 16px 0 0;
+  top: calc(100% - 13px);
+  right: 0;
+}
+
+.ql-editor {
+  min-height: 200px;
+  border: 0px !important;
+}
+
+.ql-container {
+  border: 0px !important;
+}
+
+.ql-toolbar {
+  border: 0px !important;
+}
+
+.quill {
+  background-color: #f4f5f7;
+  border-radius: 34px;
+}
+
+@keyframes move-svg-border {
+  0% {
+    stroke-dashoffset: 0%;
+  }
+  100% {
+    stroke-dashoffset: -100%;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
