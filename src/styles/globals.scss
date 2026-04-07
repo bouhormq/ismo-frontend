@@ -49,6 +49,22 @@
 .ql-editor {
   min-height: 200px;
   border: 0px !important;
+
+  strong {
+    font-weight: bold !important;
+  }
+
+  em {
+    font-style: italic !important;
+  }
+
+  u {
+    text-decoration: underline !important;
+  }
+
+  s {
+    text-decoration: line-through !important;
+  }
 }
 
 .ql-container {

@@ -1,4 +1,5 @@
 import { isArray } from "lodash";
+import { Clock } from "lucide-react";
 import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -179,7 +180,7 @@ const CompanyInformationBox = () => {
           />
         </Flexbox>
 
-        <Flexbox fullWidth row className="flex-wrap gap-x-2 gap-y-8 mobileScreen:gap-y-3.5">
+        <Flexbox fullWidth row align="center" className="flex-wrap gap-x-2 gap-y-8 mobileScreen:gap-y-3.5">
           <FormStyledTextinput
             label="Dernier appel prospection"
             name="lastProspectionCall"
@@ -187,6 +188,16 @@ const CompanyInformationBox = () => {
             labelWrapperClassName="flex-grow !min-w-[unset] tabletScreen:flex-grow tabletScreen:!min-w-full"
             labelClassName="whitespace-nowrap"
           />
+          <button
+            type="button"
+            onClick={() => {
+              setValue("lastProspectionCall", new Date().toISOString().split("T")[0]);
+            }}
+            className="flex items-center gap-2 whitespace-nowrap rounded-full border border-blue-primary px-4 py-2 text-sm font-medium text-blue-primary transition-opacity hover:opacity-75"
+          >
+            <Clock className="h-4 w-4" />
+            Mettre la date d&apos;aujourd&apos;hui
+          </button>
         </Flexbox>
       </Flexbox>
     </BoxesLayout>

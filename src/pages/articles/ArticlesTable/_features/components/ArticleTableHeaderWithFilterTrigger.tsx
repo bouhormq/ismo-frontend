@@ -124,11 +124,14 @@ const ArticleTableHeaderWithFilterTrigger = ({ handleAdd }: Props) => {
 
     setIsPendingPDF(true);
     try {
+      const selectedRows = getSelectedRows();
       const isSingle = selectedIds.length === 1;
       const blob = isSingle
         ? await generateArticlesPDF({ articleIds: selectedIds })
         : await generateCataloguePDF({ articleIds: selectedIds });
-      const filename = isSingle ? "Article.pdf" : "Catalogue.pdf";
+      const filename = isSingle
+        ? `Fiche article - ${selectedRows[0]?.title ?? "Article"}.pdf`
+        : "Catalogue produits.pdf";
       generatePDF(blob, filename, view);
     } catch (error) {
       console.error("Error generating PDF:", error);
