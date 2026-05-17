@@ -47,7 +47,8 @@ const ClientFormWrapper = <T extends NewCompanyDataType | EditCompanyDataType>({
     const autoSaveHandler = onAutoSave || handleOnSubmit;
     if (!autoSaveHandler) return;
 
-    const subscription = form.watch(() => {
+    const subscription = form.watch((_, { type }) => {
+      if (type !== "change") return;
       if (!isInitializedRef.current) {
         isInitializedRef.current = true;
         lastSavedDataRef.current = JSON.stringify(form.getValues());
