@@ -15,9 +15,11 @@ import Flexbox from "$/components/ui/Flexbox";
 
 export type LocalContactSendEmailsParams = Omit<
   ContactSendEmailsParams,
-  "documents"
+  "documents" | "cc" | "bcc"
 > & {
   documents: File[];
+  cc?: string;
+  bcc?: string;
 };
 
 type Props = {
