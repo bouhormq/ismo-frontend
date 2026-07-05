@@ -92,6 +92,22 @@ export const sendEmailSchema = zod.object({
 
 export type SendEmailDataType = zod.infer<typeof sendEmailSchema>;
 
+export const contactSendEmailSchema = zod.object({
+  object: zod
+    .string({ message: "Le champ objet ne doit pas être vide" })
+    .min(1, { message: "Le champ objet ne doit pas être vide" }),
+  message: zod
+    .string({ message: "Le champ message ne doit pas être vide" })
+    .min(1, { message: "Le champ message ne doit pas être vide" }),
+  cc: zod.string().optional(),
+  bcc: zod.string().optional(),
+  documents: zod.instanceof(FileList).optional(),
+  articleIds: zod.array(zod.number()).optional(),
+  sendCatalog: zod.boolean().optional(),
+});
+
+export type ContactSendEmailDataType = zod.infer<typeof contactSendEmailSchema>;
+
 export const newDocumentSchema = zod.object({
   name: zod
     .string({

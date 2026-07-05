@@ -5,7 +5,7 @@ import { contactSendEmails } from "$/api/contacts/contact-send-emails";
 import { uploadFile } from "$/api/media";
 import Form from "$/components/form/Form";
 import { useEnhancedTable } from "$/components/tables/enhanced-table/EnhancedTableProvider";
-import { sendEmailSchema } from "$/pages/companyProfile/_features/components/SendEmailModal/validations.constants";
+import { contactSendEmailSchema } from "$/pages/companyProfile/_features/components/SendEmailModal/validations.constants";
 import {
   ContactRecord,
   ContactRecordResponse,
@@ -35,9 +35,12 @@ export const ContactSendEmailModal = ({ onCancel }: Props) => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: Partial<LocalContactSendEmailsParams>) => {
-      const { documents, object, message, ...rest } = data;
+      const { documents, object, message, articleIds, sendCatalog, cc, bcc } = data;
 
       if (!object || !message) return;
+
+      const ccList = cc ? cc.split(",").map((e) => e.trim()).filter(Boolean) : undefined;
+      const bccList = bcc ? bcc.split(",").map((e) => e.trim()).filter(Boolean) : undefined;
       const documentsWithUrls: { name: string; url: string }[] = [];
 
       await Promise.all(
@@ -57,11 +60,14 @@ export const ContactSendEmailModal = ({ onCancel }: Props) => {
       );
 
       const sendEmailResponse = await contactSendEmails({
-        ...rest,
         selectedIds: getSelectedRows().map((row) => row.id),
         object,
         message,
         documents: documentsWithUrls,
+        ...(ccList?.length ? { cc: ccList } : {}),
+        ...(bccList?.length ? { bcc: bccList } : {}),
+        ...(articleIds?.length ? { articleIds } : {}),
+        ...(sendCatalog !== undefined ? { sendCatalog } : {}),
       });
 
       resetField("object");
@@ -82,7 +88,7 @@ export const ContactSendEmailModal = ({ onCancel }: Props) => {
 
   return (
     <Form<FormValues>
-      resolverSchema={sendEmailSchema}
+      resolverSchema={contactSendEmailSchema}
       onSubmit={(data) => handleOnSubmit(data)}
       isLoading={isPending}
       className="w-full"

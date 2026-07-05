@@ -1,10 +1,15 @@
 import { restApiClient } from "$/utils/clients/restApiClient";
 
 export type ContactSendEmailsParams = {
-  documents: { name: string; url: string }[];
   object: string;
   message: string;
+  documents: { name: string; url: string }[];
   selectedIds: number[];
+  cc?: string[];
+  bcc?: string[];
+  contactIds?: number[];
+  articleIds?: number[];
+  sendCatalog?: boolean;
 };
 
 export const contactSendEmails = async (data: ContactSendEmailsParams) => {

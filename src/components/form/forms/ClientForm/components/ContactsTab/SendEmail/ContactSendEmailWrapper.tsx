@@ -4,11 +4,12 @@ import { useState } from "react";
 import { getAllArticles } from "$/api/articles/get-all-articles";
 import { ContactSendEmailsParams } from "$/api/contacts/contact-send-emails";
 import FormDocumentPreview from "$/components/DocumentUpload/FormDocumentPreview";
-import { SelectOption } from "$/components/common/FormStyledSelectInput";
 import FormStyledTextAreaInput from "$/components/common/FormStyledTextAreaInput";
 import FormStyledTextinput from "$/components/common/FormStyledTextInput";
 import FormFileInput from "$/components/form/FormFileInput";
-import ComboSelectComponent from "$/components/inputs/FormComboSelect/ComboSelectInput";
+import ComboSelectComponent, {
+  SelectOption,
+} from "$/components/inputs/FormComboSelect/ComboSelectInput";
 import Button from "$/components/ui/Button";
 import Flexbox from "$/components/ui/Flexbox";
 
@@ -26,8 +27,6 @@ type Props = {
 
 export const ContactSendEmailWrapper = ({ isPending, handleClose }: Props) => {
   const [articleQuery, setArticleQuery] = useState("");
-  const [selectedArticle, setSelectedArticle] =
-    useState<SelectOption<number>>();
 
   const { data: articles, isPending: isGettingArticles } = useQuery({
     queryKey: ["getArticles", articleQuery],
@@ -38,6 +37,13 @@ export const ContactSendEmailWrapper = ({ isPending, handleClose }: Props) => {
         { search: articleQuery },
       ),
   });
+
+  const articleOptions: SelectOption<number>[] = (articles?.data ?? []).map(
+    (article) => ({
+      value: article.id,
+      label: article.title,
+    }),
+  );
 
   return (
     <Flexbox
@@ -85,37 +91,24 @@ export const ContactSendEmailWrapper = ({ isPending, handleClose }: Props) => {
           allowedFiles={[".png", ".jpg", ".jpeg", ".pdf"]}
           multiple
         />
-
         <FormDocumentPreview fieldName="documents" />
       </div>
+
       {(articles || isGettingArticles) && (
         <Flexbox fullWidth justify="center" align="start">
           <ComboSelectComponent<number>
-            name="selectedArticleToUploadPdf"
+            name="articleIds"
             label="Article PDF"
-            defaultOuterValue={
-              selectedArticle
-                ? selectedArticle
-                : { label: "Sélectionner un article", value: 0 }
-            }
-            options={
-              articles
-                ? articles.data.map((article) => ({
-                    value: article.id,
-                    label: article.title,
-                  }))
-                : []
-            }
+            options={articleOptions}
+            multiple
             returnSingleValue
-            handleOnSelect={(selected) => {
-              if (Array.isArray(selected)) return;
-              setSelectedArticle(selected);
-            }}
             withFilter
             onChange={(value) => setArticleQuery(value.target.value)}
+            placeHolder="Sélectionner des articles"
           />
         </Flexbox>
       )}
+
       <Flexbox row fullWidth justify="center" align="center" className="gap-4">
         <Button
           type="button"
